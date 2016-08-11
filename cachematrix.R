@@ -26,9 +26,11 @@ gc() # Clear memmory (residuals of operations?, cache? Not sure)
 # set the value of the mean
 # get the value of the mean
 
-a = rbind(c(1/4, 1/2), c(1/4, 1/3)) #is my matrix
+a = rbind(c(1/4, 1/2), c(1/4, 1/3)) #thi is my matrix, the inverse of a number is when the numerator is change to the position of the denominator
+#and the denominator to the numerator. So inverse of 1/4 should be 4/1 or 4
 
-#This function creates a special "matrix" object that can cache its inverse.
+#This function creates a special "matrix" object that can cache its inverse, nevertheless it won't calculate the inverse; but it will
+#provide an empty space to save the inverse once you use the cachesolve().
 makeCacheMatrix <- function(x = matrix()) {
     m <- NULL
     set <- function(y) {
@@ -55,7 +57,7 @@ cacheSolve <- function(x, ...) {
         return(m)
     } else {
         data <- x$get()
-        m <- lapply(data,solve)
+        m <- lapply(data,solve) #I use lapply so it will apply the function solve to every object or every number. check my comment down the code
         x$setinverse(m)
         m
     }
@@ -64,3 +66,5 @@ cacheSolve <- function(x, ...) {
     
 cacheSolve(b)
 
+#if you run the cachesolve function usion m<-solve(data,...) it will give you values, but they are wrong. use this matrix rbind(c(1/4, 1/2), c(1/4, 1/3))
+#the inverse is 4,2,4,3....which is the same as 4/1, 2/1, 4/1, 3/1.
